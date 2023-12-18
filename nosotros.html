@@ -1,0 +1,78 @@
+{% include 'sitio/cabecera.html' %}
+<div class="content">
+    <div class="book-container">
+        {% for word in data %}
+        <div class="word-container">
+            <div id="hebreo" class="hebrew-word">{{ word.hebrew }}</div>
+            <div class="translation">{{ word.translation }}</div>
+        </div>
+        {% if loop.index % 5 == 0 %}
+        <div class="clear"></div>  <!-- Clear div after every 5 words -->
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+var hebreo = document.getElementById('hebreo');
+
+      hebreo.addEventListener('click', function() {
+        fetch('/manejar_click', {
+            method: 'POST',
+        })
+     
+    });
+</script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+    }
+    
+    .content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    /* Estilos específicos para el contenido del libro */
+    .book-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Cambia a flex-start */
+        gap: 20px;
+    }
+    
+    .word-container {
+        padding: 5px;
+        text-align: center;
+        width: calc(20% - 20px); /* Cambia para dividir en 5 columnas */
+        max-width: 70px; 
+    
+    }
+    
+    .hebrew-word {
+        font-family: 'Noto Serif Hebrew', serif;
+        font-size: 25px;
+        
+        color: blanchedalmond;
+        margin-top: 5px;
+    }
+    
+    .translation {
+        font-size: 17px;
+        color: gray;
+        margin-top: 5px;
+   
+
+    }
+    
+    .clear {
+        clear: both;
+    }
+</style>
+{% include 'sitio/pie.html' %}
+
+
+ 
